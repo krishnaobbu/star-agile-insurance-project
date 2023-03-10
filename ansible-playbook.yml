@@ -4,10 +4,10 @@
   connection : ssh
   tasks : 
   - name: updating apt
-    command : sudo apt-get update
+    command : apt update -y
 
   - name : Install Docker
-    command : apt-get install -y docker.io
+    command : apt install -y docker.io
     become : yes
     become_user : root
 
