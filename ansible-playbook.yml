@@ -1,20 +1,19 @@
 - name : Configure Docker on EC2 Instances
   hosts : all
-  become: true
+  become: yes
   connection : ssh
   tasks : 
   - name: updating apt
-    command : apt update -y
-
+    command : "rm -rf /var/lib/dpkg/lock*"
+    
+  - name: updating apt
+    command : "apt-get update"
+    
   - name : Install Docker
-    command : apt install -y docker.io
-    become : yes
-    become_user : root
+    command : apt-get install -y docker.io
 
   - name : Start Docker Service
     command : systemctl start docker
-    become : yes
-    become_user : root
 
   - name: Deploy Docker Container
-    command: docker run -itd -p 8086:8081 krishnaobbu/app.jar:latest 
+    command: docker run -itd -p 8083:8081 suneelraj/insurance:13
